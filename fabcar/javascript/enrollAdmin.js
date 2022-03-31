@@ -6,12 +6,15 @@
 
 'use strict';
 
-const FabricCAServices = require('fabric-ca-client');
+const main = require('./registerUser');
+
+
+
+async function main2() {
+    const FabricCAServices = require('fabric-ca-client');
 const { Wallets } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
-
-async function main() {
     try {
         // load the network configuration
         const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
@@ -23,15 +26,22 @@ async function main() {
         const ca = new FabricCAServices(caInfo.url, { trustedRoots: caTLSCACerts, verify: false }, caInfo.caName);
 
         // Create a new file system based wallet for managing identities.
-        const walletPath = path.join(process.cwd(), 'wallet');
+        // const walletPath = path.join(process.cwd(), 'wallet');
+        // const walletPath = path.join("../", 'wallet');
+        const walletPath = path.resolve(__dirname,'wallet')
+
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
         // Check to see if we've already enrolled the admin user.
         const identity = await wallet.get('admin');
         if (identity) {
-            console.log('An identity for the admin user "admin" already exists in the wallet');
-            return;
+            // console.log('An identity for the admin user "admin" already exists in the wallet');
+            const d = {
+                "status": "Success",
+                "msg": "An identity for the admin user ADMIN already exists in the wallet"
+            }
+            return d; 
         }
 
         // Enroll the admin user, and import the new identity into the wallet.
@@ -46,11 +56,19 @@ async function main() {
         };
         await wallet.put('admin', x509Identity);
         console.log('Successfully enrolled admin user "admin" and imported it into the wallet');
-
+        const d = {
+            "status":"success",
+            "msg":"Successfully enrolled admin user ADMIN and imported it into the wallet"
+        }
+        return d;
     } catch (error) {
         console.error(`Failed to enroll admin user "admin": ${error}`);
+        document.getElementById('demo').innerHTML = `Failed to enroll admin user "admin": ${error}`
         process.exit(1);
     }
 }
 
-main();
+// main2();
+// main2();
+module.exports = {main2}
+

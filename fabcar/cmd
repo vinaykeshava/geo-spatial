@@ -1,0 +1,12 @@
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGQzYjBhNjIzYzlBOTA2ZjQ4MGFhNTBlYkM3NTVGOTMwNTU0OGQxYjQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NDgxOTkzMDM5NTEsIm5hbWUiOiJzaWhQcm9qZWN0In0.YJ5_UDdnzpfy1w0pqNIAx6SERs9m5HSmNTCioLQWXA8
+
+
+//token
+
+docker logs -f orderer.example.com //orderer logs
+
+https://bafybeic5r5yxjh5xpmeczfp34ysrjcoa66pllnjgffahopzrl5yhex7d7i.ipfs.dweb.link/ 
+//for upload
+
+https://dweb.link/ipfs/
+//To see data

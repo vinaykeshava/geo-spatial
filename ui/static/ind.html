@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperLedger Fabric</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  
+    <!-- <title>DevFolio Bootstrap Portfolio Template - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords"> -->
+<!-- Favicons -->
+<link href="assets/img/favicon.png" rel="icon">
+<link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Vendor CSS Files -->
+<link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="assets/css/style.css" rel="stylesheet">
+<style>
+    #navbar{
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 0px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 20px;
+    position: sticky;
+    justify-content: space-between;
+}
+#container-nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /* padding: 10px; */
+}
+/* logo and image */ 
+
+
+
+/* navigation bar list styling  */
+#navbar ul{
+    display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+    /* display: flex; */
+    /* padding: 13px; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    margin-bottom: 0%;
+    padding-left: 0%;
+}
+#navbar::before{
+    content: "";
+    background-color: black;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.4;
+}
+#navbar ul li{
+    display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+    /* background-color: white; */
+    padding: 10px;
+    list-style: none;
+    font-size: 1.3rem;
+    list-style: none;
+    
+}
+h4{
+    text-align: center;
+    font-family: 'Yeon Sung', cursive;
+
+}
+#navbar ul li a{
+    color: white;
+    display: block;
+   padding: 3px 22px;
+   border-radius: 22px;
+   text-decoration: none;
+   
+
+}
+#navbar ul li a:hover{
+    color: grey;
+   /* background-color: white; */
+
+}
+#logo img{
+    height: 50px;
+    width: 50px;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+#login{
+display: flex;
+justify-content: center;
+color: white;
+background-color: #3e20a7;
+border-radius: 12px;
+width: 60px;
+}
+#login-btn{
+    display: flex;
+    padding: 3px 10px;
+    /* width: 100px; */
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+    body{
+        background-image: url(./images/back.jpeg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        /* background-size: 1080px 1920px; */
+    }
+
+    *{
+        color: white;
+    }
+    
+    .container{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+.container2{
+        flex-direction: column;
+        justify-content: center;
+        
+
+    }
+    .abc{
+        display: inline-block;
+    }
+    .btn btn-secondary{
+padding: 3px;
+/* margin: 30px 0px 40px 30px; */
+/* margin-top: 20px; */
+margin: 10px;
+border-style: none;
+background-color: black;
+color: beige;
+font-size: 18px;
+font-weight: 550;
+box-shadow: 0 5px 30px black;
+}
+.btn btn-secondary:hover{
+color:black ;
+background-color: white;
+}
+#form1{
+background-color: rgba(41, 39, 39, 0.3);
+/* background-color:  rgba(255,255,255,0.3); */
+border: 2px solid black;
+/* opacity: ; */
+width: 350px;
+height: 100%;
+padding: 35px;
+border-radius: 15px;
+box-shadow: 0 5px 30px black;
+}
+input{
+    color: black;
+}
+
+.infoform{
+    display: none;
+}
+
+</style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div id="container-nav">
+        <div id="logo">
+            <img src='./images/logo.jpeg' alt="">
+        </div>
+        <ul>
+            
+            <li class="item"><a href=""><h4>In-Finite</h4></a></li>
+            
+                <li class="item"><a href="#container1">Enroll Admin</a></li>
+       
+                    <li class="item"><a href="#user">Register User</a></li>
+                        <li class="item"><a href="#submit">Data Insert</a></li>
+                            <li class="item"><a href="#query">Data Query</a></li>
+                                <li class="item"><a href="#update">Data update</a></li>
+        
+        </ul>
+    </div>
+        <div id="login">
+            <div class="login-btn"><a href="/register"></a></div>
+        </div>
+    </nav>
+    
+        <div id="div2">
+            
+        </div>
+    </nav>
+    <div id="admin" class="container">
+        <div id="container1">
+            <h1>Enroll the admin </h1>
+            <button class="btn btn-secondary" onclick="enrolladmin()">Enroll Admin</button>
+            <p id="enroll_msg"></p>
+        </div>
+
+        <div id="user" class="container1">
+            <h1>Register the User </h1>
+            <button class="btn btn-secondary" onclick="register()">Register User</button>
+            <p id="register_msg"></p>
+        </div>
+        <div id="submit" class="container2">
+
+            <form action="" id="form1">
+                <h3>Insert</h3>
+                Tag : <input class="abc" id="tag" type="text" ><br>
+                Organization :  <input class="abc" id="org" type="text"><br>
+                DataHash : <input class="abc"  id="hash" type="text"><br>
+                DataId : <input class="abc" id="did" type="text"><br>
+                DataName : <input class="abc" id="name" type="text"><br>
+            </form>
+            <button class="btn btn-secondary my-3 mx-3" onclick="invoke()" >Submit</button>
+            <p id="invoke_msg" style="font-size: large;"></p>
+        </div>
+      
+        <div id="query" class="container2">
+
+            <form action="" id="form1">
+                <h3>Query</h3>
+                Data ID: <input class="abc" id="qid" type="text"><br>
+                Organization: <input class="abc" id="qorg" type="text">
+            </form>
+            <button class="btn btn-secondary my-3 mx-3" onclick="query()" >Retrive Info</button>
+            <p id="query_msg" style="font-size: large;"></p>
+            <div id="info" class="infoform" >
+                <p>Tag : <span id="tagq"></span></p>
+            <p>Organization : <span id="orgq"></span></p>
+            <p>DataHash : <span id="dhq"></span></p>
+            <p>DataId : <span id="diq"></span></p>
+            <p>DataName : <span id="dnq"></span></p>
+            </div>
+        </div>
+
+        <div id="update" class="container2">
+
+            <form action="" id="form1">
+                <h3>Update</h3>
+                Data ID: <input class="abc" id="uid" type="text"><br>
+                Organization: <input class="abc" id="uorg" type="text"><br>
+                ImageHash: <input class="abc" id="uihash" type="text"><br>
+            </form>
+            <button class="btn btn-secondary my-3 mx-3" onclick="update()" >Update Info</button>
+            <p id="updated_msg" style="font-size: large;"></p>
+        </div>
+        
+    <script>
+
+        function update() {
+            const data = {
+                "uid": document.getElementById("uid").value,
+                "uorg": document.getElementById("uorg").value,
+                "uihash": document.getElementById("uihash").value
+            }
+
+            const result = fetch("/update", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+
+            result.then(res => res.json()).then(d => {
+                document.getElementById("updated_msg").innerHTML = d.msg
+            })
+        }
+
+
+        function query() {
+            const data = {
+                "qid": document.getElementById("qid").value,
+                "qorg": document.getElementById("qorg").value
+            }
+
+            const result = fetch("/query", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+
+            result.then(res => res.json()).then(d => {
+                document.getElementById("query_msg").innerHTML = d.msg
+                var qdata = d.buffer
+                qdata=qdata.split(`["`)[1]
+                qdata=qdata.split(`"]`)[0]
+                qdata=qdata.split(`","`)
+                document.getElementById("info").classList.remove("infoform")
+               document.getElementById("tagq").innerHTML = qdata[0]
+               document.getElementById("orgq").innerHTML = qdata[1]
+               document.getElementById("dhq").innerHTML = qdata[2]
+               document.getElementById("diq").innerHTML = qdata[3]
+               document.getElementById("dnq").innerHTML = qdata[4]
+
+            })
+        }
+
+        function register() {
+
+            const result = fetch("/registeruser", {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json"
+                }
+            })
+
+            result.then(res => res.json()).then(d => {
+                console.log(d);
+                document.getElementById("register_msg").innerHTML = d.msg
+            })
+        }
+
+        function enrolladmin() {
+            const result = fetch("/enroll-admin   ", {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json"
+                },
+            })
+
+            result.then(res => res.json()).then(d => {
+                document.getElementById("enroll_msg").innerHTML = d.msg
+            })
+        }
+
+        function invoke() {
+            data = {
+                "tag": document.getElementById("tag").value,
+                "organization": document.getElementById("org").value,
+                "imagehash": document.getElementById("hash").value,
+                "imageId": document.getElementById("did").value,
+                "imagename": document.getElementById("name").value,
+            }
+            console.log(JSON.stringify(data))
+            const result = fetch("/invoke", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
+
+            result.then(res => res.json()).then(d => {
+                console.log(d);
+                document.getElementById("invoke_msg").innerHTML = d.msg
+            })
+        }
+    </script>
+</body>
+
+
+</html>

@@ -9,15 +9,28 @@
 const { Gateway, Wallets } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
+var prompt = require('prompt-sync')();
 
-async function main() {
+async function main(data) {
     try {
+        data = JSON.parse(data);
+        // let Tag = prompt('Data Tag : ');
+        let tag = data["tag"]
+        let organization = data["organization"]
+        let imagehash = data["imagehash"]
+        let imageId = data["imageId"]
+        let Imagename = data["imagename"]
+
+        // console.log(tag,organization,imagehash,imageId,Imagename);
+        // Tag ,organization,imagehash,imageId,Imagename
+
         // load the network configuration
         const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
         let ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
 
         // Create a new file system based wallet for managing identities.
-        const walletPath = path.join(process.cwd(), 'wallet');
+        // const walletPath = path.join(process.cwd(), 'wallet');
+        const walletPath = path.resolve(__dirname,'wallet')
         const wallet = await Wallets.newFileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
 
@@ -42,8 +55,7 @@ async function main() {
         // Submit the specified transaction.
         // createCar transaction - requires 5 argument, ex: ('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom')
         // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR12', 'Dave')
-        await contract.submitTransaction('createCar', 'CAR12', 'Honda', 'Accord', 'Black', 'Tom');
-        console.log('Transaction has been submitted');
+        await contract.submitTransaction('writeData',tag,organization,imagehash,imageId,Imagename);
 
         // Disconnect from the gateway.
         await gateway.disconnect();
@@ -54,4 +66,5 @@ async function main() {
     }
 }
 
-main();
+// main();
+module.exports = {main}

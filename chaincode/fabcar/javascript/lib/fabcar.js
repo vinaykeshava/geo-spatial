@@ -9,137 +9,57 @@
 const { Contract } = require('fabric-contract-api');
 
 class FabCar extends Contract {
+    async initLedger(ctx){
+        await ctx.stub.putState("key1","No Data");
+        return "success"
+    }
 
-    async initLedger(ctx) {
-        console.info('============= START : Initialize Ledger ===========');
-        const cars = [
-            {
-                color: 'blue',
-                make: 'Toyota',
-                model: 'Prius',
-                owner: 'Tomoko',
-            },
-            {
-                color: 'red',
-                make: 'Ford',
-                model: 'Mustang',
-                owner: 'Brad',
-            },
-            {
-                color: 'green',
-                make: 'Hyundai',
-                model: 'Tucson',
-                owner: 'Jin Soo',
-            },
-            {
-                color: 'yellow',
-                make: 'Volkswagen',
-                model: 'Passat',
-                owner: 'Max',
-            },
-            {
-                color: 'black',
-                make: 'Tesla',
-                model: 'S',
-                owner: 'Adriana',
-            },
-            {
-                color: 'purple',
-                make: 'Peugeot',
-                model: '205',
-                owner: 'Michel',
-            },
-            {
-                color: 'white',
-                make: 'Chery',
-                model: 'S22L',
-                owner: 'Aarav',
-            },
-            {
-                color: 'violet',
-                make: 'Fiat',
-                model: 'Punto',
-                owner: 'Pari',
-            },
-            {
-                color: 'indigo',
-                make: 'Tata',
-                model: 'Nano',
-                owner: 'Valeria',
-            },
-            {
-                color: 'brown',
-                make: 'Holden',
-                model: 'Barina',
-                owner: 'Shotaro',
-            },
-        ];
+    async writeData(ctx,Tag,organization,imagehash,imageId,Imagename){
+        let array1 = [];
+        array1[0] = Tag;
+        array1[1] = organization;
+        array1[2] = imagehash;
+        array1[3] = imageId;
+        array1[4] = Imagename;
+        let array2 = [];
+        array2[0] = array1[3];
+        array2[1] = array1[1];
+        let key = ctx.stub.createCompositeKey("array1",array2);
+        await ctx.stub.putState(key,array1.toString())
+        // console.log("This is key : " , key);
+        return array1.toString();
+    }
 
-        for (let i = 0; i < cars.length; i++) {
-            cars[i].docType = 'car';
-            await ctx.stub.putState('CAR' + i, Buffer.from(JSON.stringify(cars[i])));
-            console.info('Added <--> ', cars[i]);
+    async readData(ctx,imageId,organization){
+        let array1 = [];
+        array1[0] = imageId;
+        array1[1] = organization;
+        let key = ctx.stub.createCompositeKey("array1",array1);
+        let str = await ctx.stub.getState(key);
+        str = str.toString();
+        let  array2 = str.split(",");
+        array2.forEach(element => {
+            console.log(element);
+        });
+        return array2;
+    }
+
+    async updateData(ctx,imageId,organization,newhash){
+        let array1 = [];
+        array1[0] = imageId;
+        array1[1] = organization;
+        let key = ctx.stub.createCompositeKey("array1",array1);
+        let str = await ctx.stub.getState(key);
+        str = str.toString();
+        let  array2 = str.split(",");
+        if(!array2[4])
+        {
+            throw new Error(`${imageId}  does not exit`);
         }
-        console.info('============= END : Initialize Ledger ===========');
+        array2[2] = newhash;
+        await ctx.stub.putState(key,array2.toString())
+        return array2.toString();
     }
-
-    async queryCar(ctx, carNumber) {
-        const carAsBytes = await ctx.stub.getState(carNumber); // get the car from chaincode state
-        if (!carAsBytes || carAsBytes.length === 0) {
-            throw new Error(`${carNumber} does not exist`);
-        }
-        console.log(carAsBytes.toString());
-        return carAsBytes.toString();
-    }
-
-    async createCar(ctx, carNumber, make, model, color, owner) {
-        console.info('============= START : Create Car ===========');
-
-        const car = {
-            color,
-            docType: 'car',
-            make,
-            model,
-            owner,
-        };
-
-        await ctx.stub.putState(carNumber, Buffer.from(JSON.stringify(car)));
-        console.info('============= END : Create Car ===========');
-    }
-
-    async queryAllCars(ctx) {
-        const startKey = '';
-        const endKey = '';
-        const allResults = [];
-        for await (const {key, value} of ctx.stub.getStateByRange(startKey, endKey)) {
-            const strValue = Buffer.from(value).toString('utf8');
-            let record;
-            try {
-                record = JSON.parse(strValue);
-            } catch (err) {
-                console.log(err);
-                record = strValue;
-            }
-            allResults.push({ Key: key, Record: record });
-        }
-        console.info(allResults);
-        return JSON.stringify(allResults);
-    }
-
-    async changeCarOwner(ctx, carNumber, newOwner) {
-        console.info('============= START : changeCarOwner ===========');
-
-        const carAsBytes = await ctx.stub.getState(carNumber); // get the car from chaincode state
-        if (!carAsBytes || carAsBytes.length === 0) {
-            throw new Error(`${carNumber} does not exist`);
-        }
-        const car = JSON.parse(carAsBytes.toString());
-        car.owner = newOwner;
-
-        await ctx.stub.putState(carNumber, Buffer.from(JSON.stringify(car)));
-        console.info('============= END : changeCarOwner ===========');
-    }
-
 }
 
 module.exports = FabCar;
